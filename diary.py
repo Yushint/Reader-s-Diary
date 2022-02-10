@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox as mb
 from main_window import Window
 from PIL import Image, ImageTk
 import os
@@ -13,7 +14,7 @@ class DiaryWindow(Window):
         self.root.configure(menu=self.mainmenu)
         
         self.filemenu = Menu(self.mainmenu, tearoff=0)
-        self.filemenu.add_command(label="Экспорт отзывов", command=self.export)
+        self.filemenu.add_command(label="Экспорт записей", command=self.export)
         self.filemenu.add_separator()
         self.filemenu.add_command(label="Выход", command=self.exit)
         self.mainmenu.add_cascade(label="Дневник", menu=self.filemenu)
@@ -27,13 +28,13 @@ class DiaryWindow(Window):
         pass
     
     def exit(self):
-        pass
+        self.root.destroy()
     
     def help(self):
         pass
     
     def about(self):
-        pass
+        mb.showinfo("О программе", "Автор программы - Абрамов Илья, студент ФГиИБ.\nПрограмма читательского дневника была создана в рамках индивидуального задания для курса ЯП в МИИГАиК.\nПользоваться дневником по назначению не воспрещается.")
         
     
 app = DiaryWindow()
