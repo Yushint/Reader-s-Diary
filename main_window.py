@@ -14,7 +14,7 @@ def mainwindow():
     window.run()
 
 
-class MainWindow:
+class Window:
     def __init__(self):
         self.root = Tk()
         self.WIDTH = self.root.winfo_screenwidth()
@@ -27,7 +27,18 @@ class MainWindow:
         self.root.geometry('650x350+{}+{}'.format(self.WIDTH, self.HEIGHT))
         self.root.title("Reader's Diary")
         self.root.resizable(False, False)
-        self.root.config(bg="#f5f5dc")        
+        self.root.config(bg="#f5f5dc")
+    
+    def set_icon(self):
+        self.root.iconbitmap("Icon.ico")  
+    
+    def run(self):
+        self.root.mainloop()    
+    
+    
+class MainWindow(Window):
+    def __init__(self):
+        super().__init__()
     
     def set_frames(self):
         self.top_frame = Frame(self.root)
@@ -43,7 +54,7 @@ class MainWindow:
     def set_labels(self):
         self.top_label = Label(self.top_frame, width=650, height=190, bg="white")
         self.top_label.pack(side=TOP)
-       
+        
     def set_enter_button(self):
         self.button = Button(self.bottom_frame, text="Reader's Diary", font=("Courier New", 20), command=self.enter, bg="#f5f5dc", activebackground="#f5f5dc")
         self.button.pack(side=TOP)
@@ -55,10 +66,7 @@ class MainWindow:
     def set_icon(self):
         self.icon_img = Image.open("img/icon.jpg")
         self.icon_img.save("Icon.ico")
-        self.root.iconbitmap("Icon.ico")
-    
-    def run(self):
-        self.root.mainloop()     
+        self.root.iconbitmap("Icon.ico")    
         
 
 if __name__ == "__main__":
