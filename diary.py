@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from tkinter import *
 from tkinter import messagebox as mb
+from tkinter.ttk import Notebook
 from main_window import Window
 from PIL import Image, ImageTk
 from datetime import datetime as dt
@@ -10,16 +11,25 @@ class DiaryWindow(Window):
     def __init__(self):
         super().__init__()
         
-        self.center_label = Label(self.root, text="You are welcome.", font=("Courier New", 20), bg="#f5f5dc")
+        self.main_tab = Notebook(self.root)
+        self.first_tab = Frame(self.main_tab, bg="#f5f5dc")
+        self.second_tab = Frame(self.main_tab)
+        self.main_tab.add(self.first_tab, text="Diary")
+        self.main_tab.add(self.second_tab, text="Search")
+        self.main_tab.pack(expand=1, fill="both")
+        
+        self.center_label = Label(self.first_tab, text="You are welcome.", font=("Courier New", 20), bg="#f5f5dc")
         self.center_label.place(x=190, y=5)
         
-        self.date_label = Label(self.root, text=dt.today().strftime(("%d %B %Y,\n %A.")), font=("Courier New", 9, "bold"), bg="#f5f5dc", fg="#b15124")
+        self.date_label = Label(self.first_tab, text=dt.today().strftime(("%d %B %Y,\n %A.")), font=("Courier New", 9, "bold"), bg="#f5f5dc", fg="#b15124")
         self.date_label.place(x=500, y=3)
         
-        self.bg_scroll_label = Label(self.root, bg="#f5f5dc", width=185, height=120)
-        self.bg_scroll_label.place(x=480, y=200)
+        self.book_box = Listbox(self.first_tab, width=30, height=15)
+        self.book_box.place(x=5, y=50)
         
     def set_background_images(self):
+        self.bg_scroll_label = Label(self.first_tab, bg="#f5f5dc", width=185, height=120)
+        self.bg_scroll_label.place(x=480, y=185)        
         self.bg_scroll_image = Image.open("img/scroll.png")
         self.tk_bg_scroll_image = ImageTk.PhotoImage(self.bg_scroll_image)
         self.bg_scroll_label.config(image=self.tk_bg_scroll_image)
