@@ -1,7 +1,8 @@
 # is made by Abramov Ilya (@evoriath), GNU GPL
+# -*- coding: utf-8 -*-
 from tkinter import *
 from PIL import Image, ImageTk
-import os
+from subprocess import call
 
 
 def mainwindow():
@@ -61,7 +62,7 @@ class MainWindow(Window):
     
     def enter(self):
         self.root.destroy()
-        os.system("python diary.py")
+        call(["python", "diary.py"])
     
     def set_icon(self):
         self.icon_img = Image.open("img/icon.jpg")
