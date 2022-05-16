@@ -40,6 +40,7 @@ class Window:
 class MainWindow(Window):
     def __init__(self):
         super().__init__()
+        self.root.after(2500, lambda: self.enter_without_button())
     
     def set_frames(self):
         self.top_frame = Frame(self.root)
@@ -67,7 +68,11 @@ class MainWindow(Window):
     def set_icon(self):
         self.icon_img = Image.open("img/icon.jpg")
         self.icon_img.save("Icon.ico")
-        self.root.iconbitmap("Icon.ico")    
+        self.root.iconbitmap("Icon.ico")
+    
+    def enter_without_button(self):
+        self.root.destroy()
+        call(["python", "diary.py"])        
         
 
 if __name__ == "__main__":
